@@ -1,5 +1,5 @@
 
-dict = {"1":"java","2":"python","3":"sql","2":"node"}
+dict = {"1":"java","2":"python","3":"sql"}
 
 # print(dict)
 
@@ -9,11 +9,14 @@ dict = {"1":"java","2":"python","3":"sql","2":"node"}
 # dt = dict.copy()
 # print(dt)
 
-dt = {"5":"react"}
+# dt = {"5":"react"}
 
-dt.update(dict)
-print(dt.values())
-print(dt.keys())
-print(dt.items())
-dt.clear()
-print(dt)
+# dt.update(dict)
+# print(dt.values())
+# print(dt.keys())
+# print(dt.items())
+# dt.clear()
+# print(dt)
+
+dict.pop('1')
+print(dict)

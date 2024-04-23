@@ -25,6 +25,6 @@ class NoteBook(Pen):
 # p = Pen()
 # p.display()
 
-n = NoteBook()
-n.price = 500
-n.show()
+# n = NoteBook()
+# n.price = 500
+# n.show()

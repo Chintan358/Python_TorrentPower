@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function btn() {
+            //alert("ok")
+            //prompt("hello")
+            //confirm("R u sure want to dlete?")
+            var btn = document.getElementById("btn")
+            btn.style.color = "red"
+            btn.style.backgroundColor = "green"
+            btn.style.width = "70px"
+            btn.style.height = "30px"
+        }
+
+        function btn1() {
+
+            var btn = document.getElementById("btn")
+            btn.style.color = ""
+            btn.style.backgroundColor = ""
+            btn.style.width = ""
+            btn.style.height = ""
+        }
+
+        function tf() {
+
+            var uname = document.getElementById("uname")
+            uname.style.backgroundColor = "black"
+            uname.style.color = "white"
+        }
+
+        function tf1() {
+
+            var uname = document.getElementById("uname")
+            uname.style.backgroundColor = "red"
+            uname.style.color = "white"
+        }
+
+        function add() {
+            var a = document.getElementById("a").value
+            var b = document.getElementById("b").value
+            var r = document.getElementById("r")
+
+            r.innerHTML = Number(a) + Number(b)
+        }
+
+        function sub() {
+            var a = document.getElementById("a").value
+            var b = document.getElementById("b").value
+            var r = document.getElementById("r")
+
+            r.innerHTML = Number(a) - Number(b)
+        }
+
+        function mul() {
+            var a = document.getElementById("a").value
+            var b = document.getElementById("b").value
+            var r = document.getElementById("r")
+
+            r.innerHTML = Number(a) * Number(b)
+        }
+
+        function div() {
+            var a = document.getElementById("a").value
+            var b = document.getElementById("b").value
+            var r = document.getElementById("r")
+
+            r.innerHTML = Number(a) / Number(b)
+        }
+
+        function data(data)
+        {
+            document.getElementById("dt").innerHTML=data
+        }
+    </script>
+</head>
+
+<body>
+
+
+    <button onmouseover="btn()" onmouseout="btn1()" id="btn">Submit</button>
+
+    <input type="text" onclick="tf()" onblur="tf1()" id="uname">
+    <br>
+    <hr>
+    <br>
+
+    <input type="text" id="a" />
+    <input type="text" id="b" onkeyup="add()" />
+    <span id="r"></span>
+    <br>
+    <br>
+    <button onmouseover="add()">ADD</button>
+    <button onmouseover="sub()">SUB</button>
+    <button onmouseover="mul()">MUL</button>
+    <button onmouseover="div()">DIV</button>
+
+    <br>
+    <hr>
+    <br>
+
+    <input type="text" id="data" onkeyup="data(value)">
+    <h1 id="dt"></h1>
+</body>
+
+</html>

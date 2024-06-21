@@ -1,6 +1,6 @@
 import os
 
-# os.mkdir("Data")
+os.mkdir("Test")
 
 # if os.path.exists("Data1"):
 #     print("Folder available")
@@ -10,7 +10,7 @@ import os
 
 # os.removedirs("Data1")
 
-# f = open("test.txt",'w')
+# f = open("home.txt",'w')
 # f.write("Hello python, Hello tops")
 
 # f = open("test.txt",'a')
@@ -28,11 +28,11 @@ import os
 #      break
 #     print(dt)
 
-with open("test.txt",'r') as f:
+# with open("test.txt",'r') as f:
    
-    f.seek(10)
-    # print(f.tell())
-    dt = f.read()
-    print(dt)
+#     # f.seek(1)
+#     # print(f.tell())
+#     dt = f.read()
+#     print(dt)
 
 

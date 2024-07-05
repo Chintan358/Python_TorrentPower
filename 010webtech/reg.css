@@ -1,0 +1,18 @@
+* {
+  background-color: gray;
+}
+
+.lbl {
+  display: inline-block;
+  width: 100px;
+  height: 20px;
+}
+
+.tf {
+  width: 250px;
+  height: 20px;
+  margin-top: 5px;
+  background-color: white;
+  border: 1px solid black;
+}
+

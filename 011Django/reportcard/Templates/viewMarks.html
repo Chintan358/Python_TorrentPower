@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 align="center">Student ReportCard</h1>
+    <table border="1" align="center">
+        <tr>
+            <td>Student Id</td>
+            <td colspan="2">{{id}}</td>
+        </tr>
+
+        <tr>
+            <td>Student Name</td>
+            <td colspan="2">{{name}}</td>
+        </tr>
+
+        <tr>
+            <td>Student email</td>
+            <td colspan="2">{{email}}</td>
+        </tr>
+        <tr>
+            <th>Id</th>
+            <th>subject name</th>
+            <th>Marks</th>
+        </tr>
+
+        {%for data in marks%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{data.subject_name.subject_name}}</td>
+            <td>{{data.marks}}</td>
+
+        </tr>
+        {%endfor%}
+
+    </table>
+
+</body>
+
+</html>

@@ -1,55 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <h1 align="center">Student details</h1>
 
     <table border="1" align="center">
-        <tr>
-            <th>Sr.</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Age</th>
-        </tr>
+      <tr>
+        <th>Sr.</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+      </tr>
 
-        {% for data in studentdata %}
-        <tr>
-            <td>{{data.id}}</td>
-            <td><a href="{%url 'viewmarks' data.student_id.student_id %}">{{data.student_id.student_id}}</a> </td>
-            <td>{{data.name}}</td>
-            <td>{{data.email}}</td>
-            <td>{{data.age}}</td>
-        </tr>
-        {% endfor%}
+      {% for data in studentdata %}
+      <tr>
+        <td>{{data.id}}</td>
+        <td>
+          <a href="{%url 'viewmarks' data.student_id.student_id %}"
+            >{{data.student_id.student_id}}</a
+          >
+        </td>
+        <td>{{data.name}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.age}}</td>
+        <td>
+          <a href="{%url 'sendmail' data.student_id.student_id %}">Email</a>
+        </td>
+      </tr>
+      {% endfor%}
     </table>
 
     <h4 align="center">
-        <div class="pagination">
-            <span class="step-links">
-                {% if studentdata.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{studentdata.previous_page_number}}">previous</a>
-                {% endif %}
+      <div class="pagination">
+        <span class="step-links">
+          {% if studentdata.has_previous %}
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{studentdata.previous_page_number}}">previous</a>
+          {% endif %}
 
-                <span class="current">
-                    Page {{ studentdata.number }} of {{ studentdata.paginator.num_pages }}.
-                </span>
+          <span class="current">
+            Page {{ studentdata.number }} of {{ studentdata.paginator.num_pages
+            }}.
+          </span>
 
-                {% if studentdata.has_next %}
-                <a href="?page={{studentdata.next_page_number }}">next</a>
-                <a href="?page={{studentdata.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
+          {% if studentdata.has_next %}
+          <a href="?page={{studentdata.next_page_number }}">next</a>
+          <a href="?page={{studentdata.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+        </span>
+      </div>
     </h4>
-</body>
-
+  </body>
 </html>

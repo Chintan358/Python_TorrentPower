@@ -8,5 +8,7 @@ urlpatterns = [
    path('sms',sendmsg,name="sms"),
    path('email',sendemail,name="email"),
    path('email_attach',sendmail_with_attachment,name='email_attach'),
-   path('email_temp',sendmail_with_template,name="email_temp")
+   path('email_temp',sendmail_with_template,name="email_temp"),
+   path('payment',payment,name="payment"),
+   path('checkout',checkout,name='checkout')
 ]

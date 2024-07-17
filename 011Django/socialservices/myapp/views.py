@@ -4,6 +4,8 @@ from django.conf import settings
 from django.core.mail import send_mail,EmailMessage
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+import razorpay
+from django.http import JsonResponse
 # Create your views here.
 def sendmsg(request):
 
@@ -53,3 +55,17 @@ def sendmail_with_template(request):
     recipient_list = ["chintan.tops@gmail.com"]
     send_mail( subject, plain_message, email_from, recipient_list ,html_message=html_message)
     return HttpResponse("email sent successfully")
+
+
+def payment(request):
+
+    amt =  int(request.GET.get('amt'))
+    client = razorpay.Client(auth=("rzp_test_vShc3jkqR6WD4U", "VtLDN9aNp9VIacborhUw96H2"))
+
+    data = { "amount": amt*100, "currency": "INR", "receipt": "order_rcptid_11" }
+    payment = client.order.create(data=data)
+    
+    return JsonResponse(payment)
+
+def checkout(request):
+    return render(request,'index.html')

@@ -1,63 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1 align="center">Registration form</h1>
 
     <table border="1" align="center">
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %} <!-- CSRF protection -->
-            <tr>
-                <td colspan="2"> <span>{{msg}}</span></td>
-            </tr>
-            <tr>
-                <td>Username</td>
-                <td><input type="text" name="uname" placeholder="Enter username"></td>
-            </tr>
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- CSRF protection -->
+        <tr>
+          <td colspan="2"><span>{{msg}}</span></td>
+        </tr>
+        <tr>
+          <td>Username</td>
+          <td>
+            <input
+              type="text"
+              name="uname"
+              placeholder="Enter username"
+              value="{{student.name}}"
+            />
+          </td>
+        </tr>
 
-            <tr>
-                <td>Image</td>
-                <td><input type="file" name="file"></td>
-            </tr>
+        <tr>
+          <td>Image</td>
+          <td>
+            <input type="file" name="file" /><br />
+            <img
+              src="/media/{{student.image}}"
+              alt="{{student.image}}"
+              width="50"
+              height="50"
+            />
+            <span>{{student.image}}</span>
+          </td>
+        </tr>
 
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Submit">
-                    <input type="reset" value="Reset">
-                </td>
-            </tr>
-        </form>
+        <tr>
+          <td></td>
+          <td>
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Reset" />
+          </td>
+        </tr>
+      </form>
     </table>
 
     <h1 align="center">Users</h1>
 
     <table border="1" align="center">
-        <tr>
-            <td>Id</td>
-            <td>Username</td>
-            <td>Image</td>
-            <td>Action</td>
-        </tr>
+      <tr>
+        <td>Id</td>
+        <td>Username</td>
+        <td>Image</td>
+        <td>Action</td>
+      </tr>
 
-        {% for student in students %}
-        <tr>
-            <td>{{student.id}}</td>
-            <td>{{student.name}}</td>
-            <td><img src="/media/{{student.image}}" alt="{{student.image}}" width="50" height="50"></td>
-            <td><a href="{% url 'delete' student.id%}">Delete</a></td>
-            <td><a href="">Edit</a></td>
-        </tr>
+      {% for student in students %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{student.name}}</td>
+        <td>
+          <img
+            src="/media/{{student.image}}"
+            alt="{{student.image}}"
+            width="50"
+            height="50"
+          />
+        </td>
+        <td><a href="{% url 'delete' student.id%}">Delete</a></td>
+        <td><a href="{%url 'edit' student.id%}">Edit</a></td>
+      </tr>
 
-        {% endfor %}
+      {% endfor %}
     </table>
-
-</body>
-
+  </body>
 </html>

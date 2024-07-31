@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Student
 import os
 # Create your views here.
@@ -22,7 +22,35 @@ def index(request):
 
 def delete(request,id):
     student = Student.objects.get(id=id)
-    os.remove(student.image.path)
+    
     student.delete()
+    try : 
+        os.remove(student.image.path)
+    except Exception as e:
+        pass
 
-    return render(request, 'index.html', {'title': 'File Upload App','msg':'File Deleted Successfully','students':Student.objects.all()})
+    # return render(request, 'index.html', {'title': 'File Upload App','msg':'File Deleted Successfully','students':Student.objects.all()})
+    return redirect("index")
+
+def edit(request,id):
+    student = Student.objects.get(id=id)
+    if request.method == 'POST':
+        
+        if not request.FILES:
+            student.name = request.POST['uname']
+        else :
+         os.remove(student.image.path)
+         student.name = request.POST['uname']
+         student.image = request.FILES['file']
+        
+       
+
+        student.save()
+        
+        
+        
+        
+        # 'return render(request, 'index.html', {'msg': 'File Edited Successfully','students':Student.objects.all()})'
+        return redirect("index")
+    
+    return render(request, 'index.html', {'student': student,'students':Student.objects.all()})

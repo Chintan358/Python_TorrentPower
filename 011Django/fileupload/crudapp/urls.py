@@ -8,7 +8,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
    path("",index,name="index"),
-   path("delete/<id>",delete,name="delete")
+   path("delete/<id>",delete,name="delete"),
+   path("edit/<id>",edit,name="edit")
 ]
 
 

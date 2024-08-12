@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#ubtn").hide()
+      load();
+    });
+
+    function load() {
+      $.get("loadstudents", {}, function (data) {
+
+        var rows = "";
+        for (var i in data.Students) {
+
+          rows = rows + `<tr>
+                <td>${data.Students[i].id}</td>
+                <td>${data.Students[i].name}</td>
+                <td>${data.Students[i].email}</td>
+                <td>${data.Students[i].age}</td>
+                <td><button onclick='deleteStudent(${data.Students[i].id})'>Delete</button></td>
+                 <td><button onclick='updateStudent(${data.Students[i].id})'>Update</button></td>
+              </tr>`
+        }
+
+        $("#tdata").html(rows)
+
+      });
+    }
+
+    function addStudent() {
+      var csrfmiddlewaretoken = document.getElementsByName(
+        "csrfmiddlewaretoken"
+      )[0].value;
+
+      var name = $("#name").val();
+      var email = $("#email").val();
+      var age = $("#age").val();
+
+      $.post(
+        "addstudent",
+        { csrfmiddlewaretoken, name, email, age },
+        function (rt) {
+          //alert(rt);
+
+          $("#name").val("");
+          $("#email").val("");
+          $("#age").val("");
+          load()
+        }
+      );
+    }
+
+
+    function deleteStudent(id) {
+      $.get("deleteStudent", { id }, function (rt) {
+        load()
+      })
+    }
+
+    function updateStudent(id) {
+      $.get("getStudent", { id }, function (rt) {
+
+        $("#id").val(rt.Student[0].id)
+        $("#name").val(rt.Student[0].name)
+        $("#email").val(rt.Student[0].email)
+        $("#age").val(rt.Student[0].age)
+
+        $("#ubtn").show()
+        $("#sbtn").hide()
+
+      })
+    }
+
+    function editStudent() {
+
+      var csrfmiddlewaretoken = document.getElementsByName(
+        "csrfmiddlewaretoken"
+      )[0].value;
+
+      var id = $("#id").val();
+      var name = $("#name").val();
+      var email = $("#email").val();
+      var age = $("#age").val();
+
+      $.post(
+        "editStudent",
+        { id, csrfmiddlewaretoken, name, email, age },
+        function (rt) {
+          //alert(rt);
+
+          $("#id").val("");
+          $("#name").val("");
+          $("#email").val("");
+          $("#age").val("");
+          load()
+
+          $("#sbtn").show()
+          $("#ubtn").hide()
+
+        }
+      );
+
+    }
+
+    function search(value) {
+
+      $.get("searchstudent", { value }, function (data) {
+
+        var rows = "";
+        for (var i in data.Students) {
+
+          rows = rows + `<tr>
+        <td>${data.Students[i].id}</td>
+        <td>${data.Students[i].name}</td>
+        <td>${data.Students[i].email}</td>
+        <td>${data.Students[i].age}</td>
+        <td><button onclick='deleteStudent(${data.Students[i].id})'>Delete</button></td>
+         <td><button onclick='updateStudent(${data.Students[i].id})'>Update</button></td>
+      </tr>`
+        }
+
+        $("#tdata").html(rows)
+
+      });
+    }
+
+  </script>
+</head>
+
+<body>
+  <h1 align="center">Student Registration</h1>
+
+
+
+  <table align="center">
+    {%csrf_token%}
+    <input type="hidden" id="id" name="id">
+    <tr>
+      <td><label for="name">Name</label></td>
+      <td><input type="text" name="name" id="name" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="email">Email</label></td>
+      <td><input type="text" name="email" id="email" /></td>
+    </tr>
+
+    <tr>
+      <td><label for="age">Age</label></td>
+      <td><input type="text" name="age" id="age" /></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td><button onclick="addStudent()" id="sbtn">Submit</button>
+        <button onclick="editStudent()" id="ubtn">Update</button>
+      </td>
+    </tr>
+  </table>
+
+  <h1 align="center">Student Details</h1>
+
+  <div style="width: 400px; margin: auto;">
+    <input type="text" id="search" style="width: 400px;" placeholder="Search" onkeyup="search(value)">
+  </div>
+  <br>
+  <table align="center" border="1">
+
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th colspan="2">Action</th>
+      </tr>
+    </thead <!-- Students will be loaded here -->
+    <tbody id="tdata">
+      <!-- Student data will be inserted here -->
+    </tbody>
+  </table>
+</body>
+
+</html>
